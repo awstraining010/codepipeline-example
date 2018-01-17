@@ -1,0 +1,28 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Effect": "Allow",
+          "Action": [
+              "ssm:DescribeParameters"
+          ],
+          "Resource": "*"
+      },
+      {
+          "Effect": "Allow",
+          "Action": [
+              "ssm:GetParameters"
+          ],
+          "Resource": [
+              "arn:aws:ssm:<region>:<account-id>:parameter/<service-name>"
+          ]
+      },
+      {
+          "Effect": "Allow",
+          "Action": [
+              "kms:Decrypt"
+          ],
+          "Resource": "arn:aws:kms:<region>:<accountid>:alias/aws/ssm"
+      }
+  ]
+}
