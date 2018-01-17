@@ -1,0 +1,77 @@
+#!/bin/bash
+
+set -e
+
+CATALINA_HOME=/usr/share/tomcat-codedeploy
+
+# Tar file name
+TOMCAT_CORE_TAR_FILENAME='apache-tomcat-8.5.24.tar.gz'
+# Download URL for Tomcat core
+TOMCAT_CORE_DOWNLOAD_URL="http://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.24/bin/$TOMCAT_CORE_TAR_FILENAME"
+# The top-level directory after unpacking the tar file
+TOMCAT_CORE_UNPACKED_DIRNAME='apache-tomcat-8.5.24'
+
+
+# Check whether there exists a valid instance
+# of Tomcat installed at the specified directory
+[[ -d $CATALINA_HOME ]] && { service tomcat status; } && {
+    echo "Tomcat is already installed at $CATALINA_HOME. Skip reinstalling it."
+    exit 0
+}
+
+# Clear install directory
+if [ -d $CATALINA_HOME ]; then
+    rm -rf $CATALINA_HOME
+fi
+mkdir -p $CATALINA_HOME
+
+# Download the latest Tomcat version
+cd /tmp
+{ which wget; } || { yum install wget; }
+wget $TOMCAT_CORE_DOWNLOAD_URL
+if [[ -d /tmp/$TOMCAT_CORE_UNPACKED_DIRNAME ]]; then
+    rm -rf /tmp/$TOMCAT_CORE_UNPACKED_DIRNAME
+fi
+tar xzf $TOMCAT_CORE_TAR_FILENAME
+
+# Copy over to the CATALINA_HOME
+cp -r /tmp/$TOMCAT_CORE_UNPACKED_DIRNAME/* $CATALINA_HOME
+
+# Install Java if not yet installed
+{ which java; } || { yum install java-1.8.0 -y; }
+
+#Check Java 8 is installed
+TMP_JAVA=java;
+TMP_JAVA_VERSION=$("$TMP_JAVA" -version 2>&1 | awk -F '"' '/version/ {print $2}')
+if [[  "$TMP_JAVA_VERSION" < "1.8" ]]; then
+   yum remove java -y;
+   yum install java-1.8.0 -y;
+fi
+
+# Create the service init.d script
+cat > /etc/init.d/tomcat <<'EOF'
+#!/bin/bash
+# description: Tomcat Start Stop Restart
+# processname: tomcat
+PATH=$JAVA_HOME/bin:$PATH
+export PATH
+CATALINA_HOME='/usr/share/tomcat-codedeploy'
+
+case $1 in
+start)
+sh $CATALINA_HOME/bin/startup.sh
+;;
+stop)
+sh $CATALINA_HOME/bin/shutdown.sh
+;;
+restart)
+sh $CATALINA_HOME/bin/shutdown.sh
+sh $CATALINA_HOME/bin/startup.sh
+;;
+esac
+exit 0
+EOF
+
+# Change permission mode for the service script
+chmod 755 /etc/init.d/tomcat
+
