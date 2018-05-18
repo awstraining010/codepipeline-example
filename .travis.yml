@@ -1,5 +1,8 @@
 language: java
-sudo: enabled
+sudo: false
 os:
   - linux
-install: ./scripts/check_pk_health.sh
+  - dist: trusty
+before_install:
+  - sudo chmod +x ./scripts/check_pk_health.sh
+install: sudo ./scripts/check_pk_health.sh

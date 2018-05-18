@@ -31,7 +31,7 @@ mkdir -p $CATALINA_HOME
 
 # Download the latest Tomcat version
 cd /tmp
-{ which wget; } || { yum install wget; }
+{ which wget; } || { apt-get install wget; }
 wget $TOMCAT_CORE_DOWNLOAD_URL
 if [[ -d /tmp/$TOMCAT_CORE_UNPACKED_DIRNAME ]]; then
     rm -rf /tmp/$TOMCAT_CORE_UNPACKED_DIRNAME
