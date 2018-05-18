@@ -67,3 +67,8 @@ EOF
 
 # Change permission mode for the service script
 chmod 755 /etc/init.d/tomcat
+
+[[ -d $CATALINA_HOME ]] && { service tomcat status; } && {
+    echo "Tomcat is already installed at $CATALINA_HOME. Skip reinstalling it."
+    exit 0
+}

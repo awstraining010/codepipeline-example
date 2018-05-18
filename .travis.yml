@@ -3,6 +3,12 @@ sudo: false
 os:
   - linux
   - dist: trusty
+jdk:
+  - oraclejdk8
+  - openjdk8
+  - openjdk7
+
 before_install:
   - sudo chmod +x ./scripts/check_pk_health.sh
-install: sudo ./scripts/check_pk_health.sh
+install:
+  - sudo ./scripts/check_pk_health.sh
