@@ -1,14 +1,10 @@
 language: java
 sudo: false
-os:
-  - linux
-  - dist: trusty
 jdk:
-  - oraclejdk8
-  - openjdk8
   - openjdk7
+  - openjdk8
 
 before_install:
-  - sudo chmod +x ./scripts/check_pk_health.sh
-install:
+  - chmod +x ./scripts/check_pk_health.sh
+script:
   - sudo ./scripts/check_pk_health.sh
