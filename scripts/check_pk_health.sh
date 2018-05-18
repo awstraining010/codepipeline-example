@@ -41,17 +41,6 @@ tar xzf $TOMCAT_CORE_TAR_FILENAME
 # Copy over to the CATALINA_HOME
 cp -r /tmp/$TOMCAT_CORE_UNPACKED_DIRNAME/* $CATALINA_HOME
 
-# Install Java if not yet installed
-{ which java; } || { yum install java-1.8.0 -y; }
-
-# Check Java 8 is installed
-TMP_JAVA=java;
-TMP_JAVA_VERSION=$("$TMP_JAVA" -version 2>&1 | awk -F '"' '/version/ {print $2}')
-if [[  "$TMP_JAVA_VERSION" < "1.8" ]]; then
-   yum remove java -y;
-   yum install java-1.8.0 -y;
-fi
-
 # Create the service init.d script
 cat > /etc/init.d/tomcat <<'EOF'
 #!/bin/bash
@@ -78,4 +67,3 @@ EOF
 
 # Change permission mode for the service script
 chmod 755 /etc/init.d/tomcat
-

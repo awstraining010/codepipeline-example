@@ -1,0 +1,5 @@
+language: java
+sudo: enabled
+os:
+  - linux
+install: ./scripts/check_pk_health.sh
