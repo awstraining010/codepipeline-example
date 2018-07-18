@@ -6,7 +6,7 @@ CATALINA_HOME=/usr/share/tomcat-codedeploy
 
 # Tomcat version
 TOMCAT_VER=8
-TOMCAT_VERSION=8.5.31
+TOMCAT_VERSION=8.5.32
 # Tar file name
 TOMCAT_CORE_TAR_FILENAME="apache-tomcat-$TOMCAT_VERSION.tar.gz"
 # Download URL for Tomcat core
