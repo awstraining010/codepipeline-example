@@ -7,4 +7,4 @@ jdk:
 before_install:
   - chmod +x ./scripts/check_pk_health.sh
 script:
-  - ./scripts/check_pk_health.sh
+  - sudo ./scripts/check_pk_health.sh
