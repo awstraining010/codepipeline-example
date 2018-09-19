@@ -12,6 +12,7 @@ TOMCAT_VERSION=8.5.34
 
 pip3 install requests
 pip3 install BeautifulSoup4
+pip3 install lxml
 
 eval `python3 ./scripts/crawler_tomcat_v.py`
 
