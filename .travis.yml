@@ -8,3 +8,9 @@ before_install:
   - chmod +x ./scripts/check_pk_health.sh
 script:
   - sudo ./scripts/check_pk_health.sh
+
+addons:
+  apt:
+    packages:
+      - python3
+      - python3-pip
