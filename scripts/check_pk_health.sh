@@ -10,8 +10,8 @@ CATALINA_HOME=/usr/share/tomcat-codedeploy
 TOMCAT_VER=8
 TOMCAT_VERSION=8.5.34
 
-pip install requests
-pip install BeautifulSoup4
+pip3 install requests
+pip3 install BeautifulSoup4
 
 eval `python3 ./scripts/crawler_tomcat_v.py`
 
