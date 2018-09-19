@@ -13,7 +13,7 @@ TOMCAT_VERSION=8.5.34
 pip install requests
 pip install BeautifulSoup4
 
-eval `python ./scripts/crawler_tomcat_v.py`
+eval `python3 ./scripts/crawler_tomcat_v.py`
 
 # Tar file name
 # TOMCAT_CORE_TAR_FILENAME="apache-tomcat-$TOMCAT_VERSION.tar.gz"
