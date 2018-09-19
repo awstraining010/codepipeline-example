@@ -17,7 +17,7 @@ pip3 install lxml
 eval `python3 ./scripts/crawler_tomcat_v.py`
 
 # Tar file name
-# TOMCAT_CORE_TAR_FILENAME="apache-tomcat-$TOMCAT_VERSION.tar.gz"
+TOMCAT_CORE_TAR_FILENAME="apache-tomcat-$TOMCAT_VERSION.tar.gz"
 # Download URL for Tomcat core
 # TOMCAT_CORE_DOWNLOAD_URL="http://www-us.apache.org/dist/tomcat/tomcat-$TOMCAT_VER/v$TOMCAT_VERSION/bin/$TOMCAT_CORE_TAR_FILENAME"
 
